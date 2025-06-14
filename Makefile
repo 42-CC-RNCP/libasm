@@ -7,9 +7,9 @@ TEST_OBJS_FULL = $(addprefix $(BUILD_DIR)/, $(TEST_OBJS))
 OBJS           = $(notdir $(SRCS:.s=.o))
 OBJS_FULL      = $(addprefix $(BUILD_DIR)/, $(OBJS))
 ACC            = nasm
-ACCFLAGS       = -f elf64
+ACCFLAGS       = -f elf64 -g -F dwarf
 CC             = cc
-CFLAGS         = -Wall -Wextra -Werror
+CFLAGS         = -Wall -Wextra -Werror -g
 RM             = rm -f
 AR             = ar
 ARFLAGS        = rcs
@@ -40,4 +40,4 @@ $(BUILD_DIR)/%.o: test/%.c
 	@mkdir -p $(BUILD_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re test

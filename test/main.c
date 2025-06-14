@@ -1,6 +1,11 @@
-extern void hello_world();
+#include <stdio.h>
+
+extern size_t ft_strlen(const char *str);
 
 int main() {
-    hello_world();
+    const char *str = "";
+    size_t len = ft_strlen(str);
+    printf("ft_strlen(str) = %zu\n", len);
+
     return 0;
 }
