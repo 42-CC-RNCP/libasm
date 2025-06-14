@@ -28,7 +28,7 @@ clean:
 	$(RM) $(BUILD_DIR)/*.o
 
 fclean: clean
-	$(RM) $(BUILD_DIR)/$(NAME)
+	$(RM) $(BUILD_DIR)/$(NAME) $(BUILD_DIR)/test
 
 re: fclean all
 
