@@ -19,6 +19,7 @@ all: $(NAME)
 $(NAME): $(OBJS_FULL)
 	@mkdir -p $(BUILD_DIR)
 	$(AR) $(ARFLAGS) $(BUILD_DIR)/$@ $(OBJS_FULL)
+	@cp $(BUILD_DIR)/$(NAME) .
 
 $(BUILD_DIR)/%.o: src/%.s
 	@mkdir -p $(BUILD_DIR)
@@ -28,7 +29,7 @@ clean:
 	$(RM) $(BUILD_DIR)/*.o
 
 fclean: clean
-	$(RM) $(BUILD_DIR)/$(NAME) $(BUILD_DIR)/test
+	$(RM) -rf $(NAME) $(BUILD_DIR)
 
 re: fclean all
 
