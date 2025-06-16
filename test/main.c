@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
+#include <errno.h>
 
+extern ssize_t ft_write(int fd, const void *buf, size_t count);
 extern size_t ft_strlen(const char *str);
 extern char* ft_strcpy(char *dest, const char *src);
 extern int ft_strcmp(const char *s1, const char *s2);
@@ -8,6 +11,7 @@ extern int ft_strcmp(const char *s1, const char *s2);
 void test_strlen();
 void test_strcpy();
 void test_strcmp();
+void test_write();
 
 int main() {
     printf("======= Simple Tests ==========\n");
@@ -16,6 +20,8 @@ int main() {
     test_strcpy();
     printf("-------------------------------\n");
     test_strcmp();
+    printf("-------------------------------\n");
+    test_write();
     printf("\n");
     return 0;
 }
@@ -72,4 +78,21 @@ void test_strcmp() {
                s1[i], s2[i], actual, expected,
                (actual == expected) ? "✅" : "❌ MISMATCH");
     }
+}
+
+void test_write() {
+    const char *msg = "Hello from ft_write\n";
+    ssize_t ret;
+
+    printf("[ft_write to STDOUT]:\n");
+    ret = ft_write(1, msg, strlen(msg));
+    printf("Return: %zd | errno: %d (%s)\n", ret, errno, strerror(errno));
+
+    printf("[ft_write to bad fd]:\n");
+    ret = ft_write(-1, msg, strlen(msg));
+    printf("Return: %zd | errno: %d (%s)\n", ret, errno, strerror(errno));
+
+    printf("[ft_write NULL buffer]:\n");
+    ret = ft_write(1, NULL, 10);
+    printf("Return: %zd | errno: %d (%s)\n", ret, errno, strerror(errno));
 }
