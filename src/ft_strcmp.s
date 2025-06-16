@@ -7,9 +7,9 @@ ft_strcmp:
 .loop:
     movzx rax, byte [rdi] ; move s1[i] into rax
     movzx rdx, byte [rsi] ; move s2[i] into rdx
-    CMP rax, 0
+    CMP al, 0
     JE .ret
-    CMP rdx, 0
+    CMP dl, 0
     JE .ret
     CMP al, dl
     JNE .ret
@@ -18,7 +18,5 @@ ft_strcmp:
     JMP .loop
 
 .ret:
-    movsx rax, byte [rdi]    ; sign-extend s1[i] into rax
-    movsx rdx, byte [rsi]    ; sign-extend s2[i] into rdx
     SUB rax, rdx
     ret
