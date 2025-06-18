@@ -3,16 +3,16 @@ section	.text
 
 ft_strcpy:
     ; dest rdi, src rsi
-    MOV rax, rdi    ; record the dest addr for return
+    mov rax, rdi    ; record the dest addr for return
 
 .loop:
-    MOV dl, [rsi]    ; store current byte of src
+    mov dl, [rsi]    ; store current byte of src
     mov [rdi], dl    ; store to dest
-    CMP dl, 0
-    JE .done
-    INC rdi
-    INC rsi
-    JMP .loop
+    cmp dl, 0
+    je .done
+    inc rdi
+    inc rsi
+    jmp .loop
 
 .done:
     ret

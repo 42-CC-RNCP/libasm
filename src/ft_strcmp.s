@@ -2,21 +2,21 @@ section	.text
    global ft_strcmp
 
 ft_strcmp:
-    XOR rax, rax
+    xor rax, rax
 
 .loop:
     movzx rax, byte [rdi] ; move s1[i] into rax
     movzx rdx, byte [rsi] ; move s2[i] into rdx
-    CMP al, 0
-    JE .ret
-    CMP dl, 0
-    JE .ret
-    CMP al, dl
-    JNE .ret
-    INC rdi               ; s1++
-    INC rsi               ; s2++
-    JMP .loop
+    cmp al, 0
+    je .ret
+    cmp dl, 0
+    je .ret
+    cmp al, dl
+    jne .ret
+    inc rdi               ; s1++
+    inc rsi               ; s2++
+    jmp .loop
 
 .ret:
-    SUB rax, rdx
+    sub rax, rdx
     ret

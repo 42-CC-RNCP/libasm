@@ -5,7 +5,7 @@ section	.text
 ; ft_write(rdi, rsi, rdx)
 ft_write:
     ; write(system call 1) to fd
-    MOV rax, 1
+    mov rax, 1
     syscall                ; perform syscall
 
     test rax, rax          ; check if is negtive
