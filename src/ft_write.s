@@ -13,7 +13,7 @@ ft_write:
 
     ret
 
-.error
+.error:
     neg rax                ; get absolute value of syscall return, need to flip for the errno
     mov rdi, rax           ; move the errno as the 1st parameter
     call __errno_location  ; __errno_location will return the addr of errno
