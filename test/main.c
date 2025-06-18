@@ -4,6 +4,7 @@
 #include <errno.h>
 
 extern ssize_t ft_write(int fd, const void *buf, size_t count);
+extern ssize_t ft_read(int fd, void *buf, size_t count);
 extern size_t ft_strlen(const char *str);
 extern char* ft_strcpy(char *dest, const char *src);
 extern int ft_strcmp(const char *s1, const char *s2);
@@ -12,6 +13,7 @@ void test_strlen();
 void test_strcpy();
 void test_strcmp();
 void test_write();
+void test_read();
 
 int main() {
     printf("======= Simple Tests ==========\n");
@@ -22,6 +24,8 @@ int main() {
     test_strcmp();
     printf("-------------------------------\n");
     test_write();
+    printf("-------------------------------\n");
+    test_read();
     printf("\n");
     return 0;
 }
@@ -94,5 +98,25 @@ void test_write() {
 
     printf("[ft_write NULL buffer]:\n");
     ret = ft_write(1, NULL, 10);
+    printf("Return: %zd | errno: %d (%s)\n", ret, errno, strerror(errno));
+}
+
+void test_read() {
+    char buffer[100];
+    ssize_t ret;
+
+    printf("[ft_read from STDIN] (type something then Enter):\n");
+    memset(buffer, 0, sizeof(buffer));
+    ret = ft_read(0, buffer, sizeof(buffer) - 1);
+    printf("Return: %zd | errno: %d (%s)\n", ret, errno, strerror(errno));
+    printf("Buffer: \"%s\"\n", buffer);
+
+    printf("[ft_read from bad fd]:\n");
+    memset(buffer, 0, sizeof(buffer));
+    ret = ft_read(-1, buffer, 10);
+    printf("Return: %zd | errno: %d (%s)\n", ret, errno, strerror(errno));
+
+    printf("[ft_read NULL buffer]:\n");
+    ret = ft_read(0, NULL, 10);
     printf("Return: %zd | errno: %d (%s)\n", ret, errno, strerror(errno));
 }
