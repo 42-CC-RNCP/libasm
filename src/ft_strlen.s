@@ -2,14 +2,14 @@ section	.text
    global ft_strlen
 
 ft_strlen:
-    MOV rax, 0
-    MOV rbx, rdi
+    mov rax, 0
+    mov rcx, rdi
 
 .loop:
-    MOV dl, [rbx+rax]
-    CMP dl, 0
+    mov dl, [rcx+rax]
+    cmp dl, 0
     je .done
-    INC rax
+    inc rax
     jmp .loop
 
 .done:
